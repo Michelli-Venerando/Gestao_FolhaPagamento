@@ -51,67 +51,68 @@
 
 <body>
 
-  <div class="sidebar">
+<div class="layout">
+
+  <!-- MENU -->
+  <div class="menu">
     <h2>💼 Sistema</h2>
 
-    <div class="menu-item" onclick="mostrarTela('funcionarios')">👤 Funcionários</div>
-    <div class="menu-item" onclick="mostrarTela('lancamentos')">💰 Lançamentos</div>
-    <div class="menu-item" onclick="mostrarTela('folha')">📄 Folha de Pagamento</div>
+    <button onclick="mostrarTela('funcionarios')">Funcionários</button>
+    <button onclick="mostrarTela('lancamentos')">Lançamentos</button>
+    <button onclick="mostrarTela('folha')">Folha</button>
   </div>
 
+  <!-- CONTEÚDO -->
   <div class="content">
 
-<h1>Funcionários</h1>
+    <!-- FUNCIONÁRIOS -->
+    <div id="tela-funcionarios">
+      <h1>Funcionários</h1>
 
-<h3>Cadastrar Funcionário</h3>
+      <input type="hidden" id="idFuncionario">
 
-<input type="hidden" id="idFuncionario">
+      <input id="nome" placeholder="Nome">
+      <input id="data_admissao" type="date">
+      <input id="telefone" placeholder="Telefone">
+      <input id="pix" placeholder="PIX">
+      <input id="salario" placeholder="Salário">
+      <input id="bonificacao" placeholder="Bonificação">
+      <input id="vt_diario" placeholder="VT diário">
 
-<input type="text" id="nome" placeholder="Nome">
-<input type="text" id="cargo" placeholder="Cargo">
-<input id="data_admissao" type="date"><br><br>
-<input id="telefone" placeholder="Telefone"><br><br>
-<input id="pix" placeholder="PIX"><br><br>
-<input type="text" id="salario" placeholder="Salário">
-<input id="bonificacao" placeholder="Bonificação"><br><br>
+      <select id="tipo_pagamento">
+        <option value="mensal">Mensal</option>
+        <option value="semanal">Semanal</option>
+      </select>
 
+      <br><br>
 
-<select id="tipo_pagamento">
-  <option value="mensal">Mensal</option>
-  <option value="semanal">Semanal</option>
-</select><br><br>
+      <button onclick="salvarFuncionario()">Salvar</button>
+      <button onclick="carregarFuncionarios()">Carregar</button>
 
-<input id="vt_diario" placeholder="VT Diário"><br><br>
-
-<button onclick="salvarFuncionario()">Salvar</button>
-
-<hr>
-
-<button onclick="carregarFuncionarios()">Carregar Funcionários</button>
-
-<table border="1" width="100%" id="tabela">
-  <thead>
-    <tr>
-      <th>Nome</th>
-      <th>Salário</th>
-      <th>Tipo</th>
-      <th>Ações</th>
-    </tr>
-  </thead>
-  <tbody id="listaFuncionarios"></tbody>
-</table>
-
-    <div id="tela-lancamentos" style="display:none;">
-      <h1>Lançamentos</h1>
-      <p>Em breve...</p>
+      <table border="1">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Salário</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="listaFuncionarios"></tbody>
+      </table>
     </div>
 
+    <!-- LANÇAMENTOS -->
+    <div id="tela-lancamentos" style="display:none;">
+      <h1>Lançamentos</h1>
+    </div>
+
+    <!-- FOLHA -->
     <div id="tela-folha" style="display:none;">
       <h1>Folha de Pagamento</h1>
-      <p>Em breve...</p>
     </div>
 
   </div>
+</div>
 
   <script src="js/script.js"></script>
 
