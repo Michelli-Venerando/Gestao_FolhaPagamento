@@ -13,16 +13,6 @@ app.use(express.json())
 app.use(express.static("public"));
 app.use(express.json()); 
 
-app.post("/funcionarios", async (req, res) => {
-  const { data, error } = await supabase
-    .from("funcionarios")
-    .insert([req.body]);
-
-  if (error) return res.status(500).json(error);
-
-  res.json(data);
-});
-
 const supabase = createClient(
   process.env.SUPABASE_URL,
   process.env.SUPABASE_KEY
@@ -59,7 +49,7 @@ app.get('/funcionarios', async (req, res) => {
 /* ============================
   EDITAR FUNCIONÁRIOS
 ============================ */
-app.put("/funcionarios/:id", async (req, res) => {
+/*app.put("/funcionarios/:id", async (req, res) => {
   const { id } = req.params;
   const { nome, salario, cargo } = req.body;
 
@@ -76,6 +66,38 @@ app.put("/funcionarios/:id", async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
+});*/
+
+app.put("/funcionarios/:id", async (req, res) => {
+  const { id } = req.params;
+
+  const {
+    nome,
+    salario,
+    bonificacao,
+    vt_diario,
+    telefone,
+    pix,
+    tipo_pagamento
+  } = req.body;
+
+  const { data, error } = await supabase
+    .from("funcionarios")
+    .update({
+      nome,
+      salario,
+      bonificacao,
+      vt_diario,
+      telefone,
+      pix,
+      tipo_pagamento
+    })
+    .eq("id", id)
+    .select();
+
+  if (error) return res.status(500).json(error);
+
+  res.json(data);
 });
 
 /* ============================
@@ -169,15 +191,6 @@ app.listen(process.env.PORT, () => {
   console.log('Servidor rodando 🚀')
 })
 
-app.get("/funcionarios", async (req, res) => {
-  const { data, error } = await supabase
-    .from("funcionarios")
-    .select("*");
-
-  if (error) return res.status(500).json(error);
-
-  res.json(data);
-});
 
 /* ============================
    GERAR PDF

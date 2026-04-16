@@ -60,10 +60,11 @@ async function carregarFuncionarios() {
   const res = await fetch("/funcionarios");
   const dados = await res.json();
 
-  const tabela = document.getElementById("listaFuncionarios");
+  //const tabela = document.getElementById("listaFuncionarios");
+  const tabela = document.getElementById("lista");
   tabela.innerHTML = "";
 
-  dados.forEach(func => {
+  /*dados.forEach(func => {
     tabela.innerHTML += `
       <tr>
         <td>${func.nome}</td>
@@ -76,7 +77,16 @@ async function carregarFuncionarios() {
         </td>
       </tr>
     `;
-  });
+  });*/
+  dados.forEach(func => {
+  tabela.innerHTML += `
+    <li>
+      ${func.nome} - R$ ${func.salario}
+      <button onclick="editarFuncionario('${func.id}', '${func.nome}', '${func.salario}')">Editar</button>
+      <button onclick="excluirFuncionario('${func.id}')">Excluir</button>
+    </li>
+  `;
+});
 }
 
 /* ============================
@@ -127,13 +137,21 @@ async function salvarFuncionario() {
 }
 
 /* ============================
-   SALVAR
+   LIMPAR FORMULARIO
 ============================ */
+/*function limparFormulario() {
+  document.getElementById("idFuncionario").value = "";
+  document.getElementById("nome").value = "";
+  document.getElementById("cargo").value = "";
+  document.getElementById("salario").value = "";
+}*/
 function limparFormulario() {
   document.getElementById("idFuncionario").value = "";
   document.getElementById("nome").value = "";
   document.getElementById("cargo").value = "";
   document.getElementById("salario").value = "";
+  document.getElementById("bonificacao").value = "";
+  document.getElementById("vt_diario").value = "";
 }
 
 /* ============================
