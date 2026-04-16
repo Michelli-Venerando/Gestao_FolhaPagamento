@@ -3,6 +3,9 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import { createClient } from '@supabase/supabase-js'
 import PDFDocument from "pdfkit";
+import path from "path";
+
+app.use(express.static("public"));
 
 dotenv.config()
 
@@ -15,9 +18,9 @@ const supabase = createClient(
   process.env.SUPABASE_KEY
 )
 
-app.get('/', (req, res) => {
-  res.send('API funcionando 🚀')
-})
+app.get("/", (req, res) => {
+  res.sendFile(path.resolve("public/index.html"));
+});
 
 /* ============================
    FUNCIONÁRIOS
