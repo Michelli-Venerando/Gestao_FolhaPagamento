@@ -3,14 +3,81 @@
 <head>
   <meta charset="UTF-8">
   <title>Folha de Pagamento</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+      display: flex;
+    }
+
+    .sidebar {
+      width: 220px;
+      height: 100vh;
+      background: #1e293b;
+      color: white;
+      padding: 20px;
+    }
+
+    .sidebar h2 {
+      margin-bottom: 30px;
+    }
+
+    .menu-item {
+      margin: 15px 0;
+      cursor: pointer;
+    }
+
+    .menu-item:hover {
+      color: #38bdf8;
+    }
+
+    .content {
+      flex: 1;
+      padding: 20px;
+      background: #f1f5f9;
+    }
+
+    button {
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    ul {
+      margin-top: 20px;
+    }
+  </style>
 </head>
+
 <body>
 
-  <h1>Sistema de Folha de Pagamento</h1>
+  <div class="sidebar">
+    <h2>💼 Sistema</h2>
 
-  <button onclick="carregarFuncionarios()">Carregar Funcionários</button>
+    <div class="menu-item" onclick="mostrarTela('funcionarios')">👤 Funcionários</div>
+    <div class="menu-item" onclick="mostrarTela('lancamentos')">💰 Lançamentos</div>
+    <div class="menu-item" onclick="mostrarTela('folha')">📄 Folha de Pagamento</div>
+  </div>
 
-  <ul id="lista"></ul>
+  <div class="content">
+
+    <div id="tela-funcionarios">
+      <h1>Funcionários</h1>
+      <button onclick="carregarFuncionarios()">Carregar Funcionários</button>
+      <ul id="lista"></ul>
+    </div>
+
+    <div id="tela-lancamentos" style="display:none;">
+      <h1>Lançamentos</h1>
+      <p>Em breve...</p>
+    </div>
+
+    <div id="tela-folha" style="display:none;">
+      <h1>Folha de Pagamento</h1>
+      <p>Em breve...</p>
+    </div>
+
+  </div>
 
   <script src="js/app.js"></script>
 

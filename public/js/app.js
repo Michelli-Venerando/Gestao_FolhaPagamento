@@ -41,3 +41,11 @@ async function carregarFuncionarios() {
 function gerarPDF() {
   window.open("/gerar-pdf", "_blank");
 }
+
+function mostrarTela(tela) {
+  document.getElementById("tela-funcionarios").style.display = "none";
+  document.getElementById("tela-lancamentos").style.display = "none";
+  document.getElementById("tela-folha").style.display = "none";
+
+  document.getElementById("tela-" + tela).style.display = "block";
+}
