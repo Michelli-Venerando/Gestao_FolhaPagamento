@@ -41,8 +41,8 @@ async function carregarFuncionarios() {
         <td>${func.nome}</td>
         <td>R$ ${func.salario}</td>
         <td>
-          <button onclick="editarFuncionario('${func.id}', '${func.nome}', '${func.salario}')">Editar</button>
-          <button onclick="excluirFuncionario('${func.id}')">Excluir</button>
+          <button class="btn btn-primary" onclick="editarFuncionario('${func.id}', '${func.nome}', '${func.salario}')">Editar</button>
+          <button class="btn btn-danger" onclick="excluirFuncionario('${func.id}')">Excluir</button>
         </td>
       </tr>
     `;

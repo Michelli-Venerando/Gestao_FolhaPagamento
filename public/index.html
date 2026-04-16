@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Folha de Pagamento</title>
+  <link rel="stylesheet" href="css/style.css">
 
   <style>
     body {
@@ -67,39 +68,47 @@
 
     <!-- FUNCIONÁRIOS -->
     <div id="tela-funcionarios">
-      <h1>Funcionários</h1>
 
-      <input type="hidden" id="idFuncionario">
+  <h1>Funcionários</h1>
 
-      <input id="nome" placeholder="Nome">
-      <input id="data_admissao" type="date">
-      <input id="telefone" placeholder="Telefone">
-      <input id="pix" placeholder="PIX">
-      <input id="salario" placeholder="Salário">
-      <input id="bonificacao" placeholder="Bonificação">
-      <input id="vt_diario" placeholder="VT diário">
+  <div class="card">
+    <h3>Cadastrar / Editar</h3>
 
-      <select id="tipo_pagamento">
-        <option value="mensal">Mensal</option>
-        <option value="semanal">Semanal</option>
-      </select>
+    <input type="hidden" id="idFuncionario">
 
-      <br><br>
+    <input id="nome" placeholder="Nome">
+    <input id="data_admissao" type="date">
+    <input id="telefone" placeholder="Telefone">
+    <input id="pix" placeholder="PIX">
+    <input id="salario" placeholder="Salário">
+    <input id="bonificacao" placeholder="Bonificação">
+    <input id="vt_diario" placeholder="VT diário">
 
-      <button onclick="salvarFuncionario()">Salvar</button>
-      <button onclick="carregarFuncionarios()">Carregar</button>
+    <select id="tipo_pagamento">
+      <option value="mensal">Mensal</option>
+      <option value="semanal">Semanal</option>
+    </select>
 
-      <table border="1">
-        <thead>
-          <tr>
-            <th>Nome</th>
-            <th>Salário</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody id="listaFuncionarios"></tbody>
-      </table>
-    </div>
+    <button class="btn btn-primary" onclick="salvarFuncionario()">Salvar</button>
+    <button class="btn" onclick="carregarFuncionarios()">Atualizar</button>
+  </div>
+
+  <div class="card">
+    <h3>Lista de Funcionários</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Salário</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody id="listaFuncionarios"></tbody>
+    </table>
+  </div>
+
+</div>
 
     <!-- LANÇAMENTOS -->
     <div id="tela-lancamentos" style="display:none;">
