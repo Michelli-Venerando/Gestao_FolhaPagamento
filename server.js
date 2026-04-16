@@ -5,13 +5,12 @@ import { createClient } from '@supabase/supabase-js'
 import PDFDocument from "pdfkit";
 import path from "path";
 
-app.use(express.static("public"));
-
 dotenv.config()
 
 const app = express()
 app.use(cors())
 app.use(express.json())
+app.use(express.static("public"));
 
 const supabase = createClient(
   process.env.SUPABASE_URL,
