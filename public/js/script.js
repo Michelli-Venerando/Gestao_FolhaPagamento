@@ -111,7 +111,7 @@ async function cadastrarFuncionario() {
     </li>
   `;
 });
-}*/
+
 
 /* ============================
    EXCLUIR
