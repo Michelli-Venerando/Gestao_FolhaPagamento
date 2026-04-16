@@ -2,6 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
 import { createClient } from '@supabase/supabase-js'
+import PDFDocument from "pdfkit";
 
 dotenv.config()
 
@@ -132,3 +133,32 @@ app.post('/calcular-folha', async (req, res) => {
 app.listen(process.env.PORT, () => {
   console.log('Servidor rodando 🚀')
 })
+
+app.get("/funcionarios", async (req, res) => {
+  const { data, error } = await supabase
+    .from("funcionarios")
+    .select("*");
+
+  if (error) return res.status(500).json(error);
+
+  res.json(data);
+});
+
+/* ============================
+   GERAR PDF
+============================ */
+
+app.get("/gerar-pdf", async (req, res) => {
+  const doc = new PDFDocument();
+
+  res.setHeader("Content-Type", "application/pdf");
+  doc.pipe(res);
+
+  doc.fontSize(18).text("Folha de Pagamento", { align: "center" });
+
+  doc.moveDown();
+  doc.text("Funcionário: João");
+  doc.text("Salário: R$ 2.000");
+
+  doc.end();
+});
