@@ -11,6 +11,17 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 app.use(express.static("public"));
+app.use(express.json()); 
+
+app.post("/funcionarios", async (req, res) => {
+  const { data, error } = await supabase
+    .from("funcionarios")
+    .insert([req.body]);
+
+  if (error) return res.status(500).json(error);
+
+  res.json(data);
+});
 
 const supabase = createClient(
   process.env.SUPABASE_URL,

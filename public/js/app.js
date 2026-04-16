@@ -24,6 +24,39 @@ function irPara(pagina) {
   }
 }
 
+/* ============================
+   CADASTRAR FUNCIONÁRIOS
+============================ */
+
+async function cadastrarFuncionario() {
+  const funcionario = {
+    nome: document.getElementById("nome").value,
+    data_admissao: document.getElementById("data_admissao").value,
+    telefone: document.getElementById("telefone").value,
+    pix: document.getElementById("pix").value,
+    salario: parseFloat(document.getElementById("salario").value),
+    bonificacao: parseFloat(document.getElementById("bonificacao").value),
+    tipo_pagamento: document.getElementById("tipo_pagamento").value,
+    vt_diario: parseFloat(document.getElementById("vt_diario").value)
+  };
+
+  await fetch("/funcionarios", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(funcionario)
+  });
+
+  alert("Funcionário cadastrado!");
+
+  carregarFuncionarios();
+}
+
+/* ============================
+   CARREGAR FUNCIONÁRIOS
+============================ */
+
 async function carregarFuncionarios() {
   const res = await fetch("/funcionarios");
   const dados = await res.json();
@@ -38,6 +71,9 @@ async function carregarFuncionarios() {
   });
 }
 
+/* ============================
+   GERAR PDF
+============================ */
 function gerarPDF() {
   window.open("/gerar-pdf", "_blank");
 }

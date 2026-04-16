@@ -61,11 +61,31 @@
 
   <div class="content">
 
-    <div id="tela-funcionarios">
-      <h1>Funcionários</h1>
-      <button onclick="carregarFuncionarios()">Carregar Funcionários</button>
-      <ul id="lista"></ul>
-    </div>
+<h1>Funcionários</h1>
+
+<h3>Cadastrar Funcionário</h3>
+
+<input id="nome" placeholder="Nome"><br><br>
+<input id="data_admissao" type="date"><br><br>
+<input id="telefone" placeholder="Telefone"><br><br>
+<input id="pix" placeholder="PIX"><br><br>
+<input id="salario" placeholder="Salário"><br><br>
+<input id="bonificacao" placeholder="Bonificação"><br><br>
+
+<select id="tipo_pagamento">
+  <option value="mensal">Mensal</option>
+  <option value="semanal">Semanal</option>
+</select><br><br>
+
+<input id="vt_diario" placeholder="VT Diário"><br><br>
+
+<button onclick="cadastrarFuncionario()">Salvar</button>
+
+<hr>
+
+<button onclick="carregarFuncionarios()">Carregar Funcionários</button>
+
+<ul id="lista"></ul>
 
     <div id="tela-lancamentos" style="display:none;">
       <h1>Lançamentos</h1>
