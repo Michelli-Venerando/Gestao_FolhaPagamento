@@ -85,7 +85,17 @@
 
 <button onclick="carregarFuncionarios()">Carregar Funcionários</button>
 
-<ul id="lista"></ul>
+<table border="1" width="100%" id="tabela">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Salário</th>
+      <th>Tipo</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody id="corpo-tabela"></tbody>
+</table>
 
     <div id="tela-lancamentos" style="display:none;">
       <h1>Lançamentos</h1>

@@ -57,7 +57,7 @@ async function cadastrarFuncionario() {
    CARREGAR FUNCIONÁRIOS
 ============================ */
 
-async function carregarFuncionarios() {
+/*async function carregarFuncionarios() {
   const res = await fetch("/funcionarios");
   const dados = await res.json();
 
@@ -69,6 +69,42 @@ async function carregarFuncionarios() {
     li.textContent = f.nome + " - R$ " + f.salario;
     lista.appendChild(li);
   });
+}*/
+
+async function carregarFuncionarios() {
+  const res = await fetch("/funcionarios");
+  const data = await res.json();
+
+  const corpo = document.getElementById("corpo-tabela");
+  corpo.innerHTML = "";
+
+  data.forEach(f => {
+    const tr = document.createElement("tr");
+
+    tr.innerHTML = `
+      <td>${f.nome}</td>
+      <td>R$ ${f.salario}</td>
+      <td>${f.tipo_pagamento}</td>
+      <td>
+        <button onclick="excluirFuncionario('${f.id}')">Excluir</button>
+      </td>
+    `;
+
+    corpo.appendChild(tr);
+  });
+}
+
+/* ============================
+   EXCLUIR
+============================ */
+async function excluirFuncionario(id) {
+  if (!confirm("Deseja excluir?")) return;
+
+  await fetch(`/funcionarios/${id}`, {
+    method: "DELETE"
+  });
+
+  carregarFuncionarios();
 }
 
 /* ============================
