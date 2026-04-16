@@ -65,12 +65,16 @@
 
 <h3>Cadastrar Funcionário</h3>
 
-<input id="nome" placeholder="Nome"><br><br>
+<input type="hidden" id="idFuncionario">
+
+<input type="text" id="nome" placeholder="Nome">
+<input type="text" id="cargo" placeholder="Cargo">
 <input id="data_admissao" type="date"><br><br>
 <input id="telefone" placeholder="Telefone"><br><br>
 <input id="pix" placeholder="PIX"><br><br>
-<input id="salario" placeholder="Salário"><br><br>
+<input type="text" id="salario" placeholder="Salário">
 <input id="bonificacao" placeholder="Bonificação"><br><br>
+
 
 <select id="tipo_pagamento">
   <option value="mensal">Mensal</option>
@@ -79,7 +83,7 @@
 
 <input id="vt_diario" placeholder="VT Diário"><br><br>
 
-<button onclick="cadastrarFuncionario()">Salvar</button>
+<button onclick="salvarFuncionario()">Salvar</button>
 
 <hr>
 
@@ -94,7 +98,7 @@
       <th>Ações</th>
     </tr>
   </thead>
-  <tbody id="corpo-tabela"></tbody>
+  <tbody id="listaFuncionarios"></tbody>
 </table>
 
     <div id="tela-lancamentos" style="display:none;">

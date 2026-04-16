@@ -56,41 +56,26 @@ async function cadastrarFuncionario() {
 /* ============================
    CARREGAR FUNCIONÁRIOS
 ============================ */
-
-/*async function carregarFuncionarios() {
+async function carregarFuncionarios() {
   const res = await fetch("/funcionarios");
   const dados = await res.json();
 
-  const lista = document.getElementById("lista");
-  lista.innerHTML = "";
+  const tabela = document.getElementById("listaFuncionarios");
+  tabela.innerHTML = "";
 
-  dados.forEach(f => {
-    const li = document.createElement("li");
-    li.textContent = f.nome + " - R$ " + f.salario;
-    lista.appendChild(li);
-  });
-}*/
-
-async function carregarFuncionarios() {
-  const res = await fetch("/funcionarios");
-  const data = await res.json();
-
-  const corpo = document.getElementById("corpo-tabela");
-  corpo.innerHTML = "";
-
-  data.forEach(f => {
-    const tr = document.createElement("tr");
-
-    tr.innerHTML = `
-      <td>${f.nome}</td>
-      <td>R$ ${f.salario}</td>
-      <td>${f.tipo_pagamento}</td>
-      <td>
-        <button onclick="excluirFuncionario('${f.id}')">Excluir</button>
-      </td>
+  dados.forEach(func => {
+    tabela.innerHTML += `
+      <tr>
+        <td>${func.nome}</td>
+        <td>${func.cargo}</td>
+        <td>${formatarMoeda(func.salario)}</td>
+        <td>
+          <button onclick="editarFuncionario('${func.id}', '${func.nome}', '${func.cargo}', '${func.salario}')">
+            Editar
+          </button>
+        </td>
+      </tr>
     `;
-
-    corpo.appendChild(tr);
   });
 }
 
@@ -105,6 +90,50 @@ async function excluirFuncionario(id) {
   });
 
   carregarFuncionarios();
+}
+
+/* ============================
+   EDITAR
+============================ */
+
+function editarFuncionario(id, nome, cargo, salario) {
+  document.getElementById("idFuncionario").value = id;
+  document.getElementById("nome").value = nome;
+  document.getElementById("cargo").value = cargo;
+  document.getElementById("salario").value = salario;
+}
+
+
+/* ============================
+   SALVAR
+============================ */
+async function salvarFuncionario() {
+  const id = document.getElementById("idFuncionario").value;
+  const nome = document.getElementById("nome").value;
+  const cargo = document.getElementById("cargo").value;
+  const salario = document.getElementById("salario").value;
+
+  const metodo = id ? "PUT" : "POST";
+  const url = id ? `/funcionarios/${id}` : "/funcionarios";
+
+  await fetch(url, {
+    method: metodo,
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ nome, cargo, salario })
+  });
+
+  limparFormulario();
+  carregarFuncionarios();
+}
+
+/* ============================
+   SALVAR
+============================ */
+function limparFormulario() {
+  document.getElementById("idFuncionario").value = "";
+  document.getElementById("nome").value = "";
+  document.getElementById("cargo").value = "";
+  document.getElementById("salario").value = "";
 }
 
 /* ============================
