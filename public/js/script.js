@@ -5,7 +5,7 @@
 async function carregarFuncionarios() {
   const res = await fetch("/funcionarios");
   const dados = await res.json();
-    const funcionarios = await res.json();
+  //  const funcionarios = await res.json();
 
   const select = document.getElementById("funcionarioLancamento");
   select.innerHTML = "";
@@ -17,7 +17,7 @@ async function carregarFuncionarios() {
   const tabela = document.getElementById("listaFuncionarios");
   tabela.innerHTML = "";
 
-  dados.forEach(func => {
+  /*dados.forEach(func => {
     tabela.innerHTML += `
       <tr>
         <td>${func.nome}</td>
@@ -28,7 +28,7 @@ async function carregarFuncionarios() {
         </td>
       </tr>
     `;
-  });
+  });*/
 }
 /* ============================
    CADASTRAR FUNCIONÁRIOS
@@ -59,7 +59,7 @@ async function cadastrarFuncionario() {
   carregarFuncionarios();
 }
 
-  dados.forEach(func => {
+ /* dados.forEach(func => {
   tabela.innerHTML += `
     <li>
       ${func.nome} - R$ ${func.salario}
@@ -67,7 +67,7 @@ async function cadastrarFuncionario() {
       <button onclick="excluirFuncionario('${func.id}')">Excluir</button>
     </li>
   `;
-});
+});*/
 
 
 /* ============================
@@ -190,7 +190,7 @@ function abrirLancamentos() {
   document.getElementById("tela-funcionarios").style.display = "none";
   document.getElementById("tela-lancamentos").style.display = "block";
 
-  carregarFuncionariosSelect();
+  carregarFuncionarios();
 }
 /* ============================
    GERAR PDF
@@ -208,5 +208,5 @@ function mostrarTela(tela) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  carregarFuncionariosSelect();
+  carregarFuncionarios();
 });
