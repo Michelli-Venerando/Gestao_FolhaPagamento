@@ -41,7 +41,7 @@ async function carregarFuncionarios() {
         <td>${func.nome}</td>
         <td>R$ ${func.salario}</td>
         <td>
-          <button class="btn btn-primary" onclick="editarFuncionario('${func.id}', '${func.nome}', '${func.salario}')">Editar</button>
+          <button class="btn btn-primary" onclick='editarFuncionario(${JSON.stringify(func)})'>Editar</button>
           <button class="btn btn-danger" onclick="excluirFuncionario('${func.id}')">Excluir</button>
         </td>
       </tr>
@@ -129,12 +129,16 @@ async function excluirFuncionario(id) {
 /* ============================
    EDITAR
 ============================ */
-
-function editarFuncionario(id, nome, cargo, salario) {
-  document.getElementById("idFuncionario").value = id;
-  document.getElementById("nome").value = nome;
-  document.getElementById("cargo").value = cargo;
-  document.getElementById("salario").value = salario;
+function editarFuncionario(func) {
+  document.getElementById("idFuncionario").value = func.id;
+  document.getElementById("nome").value = func.nome;
+  document.getElementById("data_admissao").value = func.data_admissao;
+  document.getElementById("telefone").value = func.telefone;
+  document.getElementById("pix").value = func.pix;
+  document.getElementById("salario").value = func.salario;
+  document.getElementById("bonificacao").value = func.bonificacao;
+  document.getElementById("vt_diario").value = func.vt_diario;
+  document.getElementById("tipo_pagamento").value = func.tipo_pagamento;
 }
 
 
