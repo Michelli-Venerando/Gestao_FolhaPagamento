@@ -69,8 +69,28 @@
 
     <!-- LANÇAMENTOS -->
     <div id="tela-lancamentos" style="display:none;">
-      <h1>Lançamentos</h1>
-    </div>
+  <h2>Lançamentos</h2>
+
+  <h3>Registrar Evento</h3>
+
+  <select id="funcionarioLancamento"></select>
+
+  <input type="date" id="dataLancamento">
+
+  <select id="tipoLancamento">
+    <option value="falta">Falta</option>
+    <option value="atraso">Atraso</option>
+    <option value="desconto">Desconto</option>
+  </select>
+
+  <input type="number" id="valorLancamento" placeholder="Valor (para desconto)">
+  <input type="text" id="obsLancamento" placeholder="Observação">
+
+  <button onclick="salvarLancamento()">Salvar</button>
+
+  <h3>Registros</h3>
+  <ul id="listaLancamentos"></ul>
+</div>
 
     <!-- FOLHA -->
     <div id="tela-folha" style="display:none;">

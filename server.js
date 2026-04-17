@@ -49,25 +49,6 @@ app.get('/funcionarios', async (req, res) => {
 /* ============================
   EDITAR FUNCIONÁRIOS
 ============================ */
-/*app.put("/funcionarios/:id", async (req, res) => {
-  const { id } = req.params;
-  const { nome, salario, cargo } = req.body;
-
-  try {
-    const { data, error } = await supabase
-      .from("funcionarios")
-      .update({ nome, salario, cargo })
-      .eq("id", id)
-      .select();
-
-    if (error) throw error;
-
-    res.json(data);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});*/
-
 app.put("/funcionarios/:id", async (req, res) => {
   const { id } = req.params;
 
