@@ -7,7 +7,7 @@ async function carregarFuncionarios() {
   const dados = await res.json();
   //  const funcionarios = await res.json();
 
-  const select = document.getElementById("funcionarioLancamento");
+   const select = document.getElementById("funcionarioLancamento");
   select.innerHTML = "";
 
   funcionarios.forEach(f => {
@@ -16,6 +16,22 @@ async function carregarFuncionarios() {
 
   const tabela = document.getElementById("listaFuncionarios");
   tabela.innerHTML = "";
+
+  funcionarios.forEach(func => {
+    tabela.innerHTML += `
+      <tr>
+        <td>${func.nome}</td>
+        <td>R$ ${func.salario}</td>
+        <td>
+          <button class="btn btn-primary" onclick='editarFuncionario(${JSON.stringify(func)})'>Editar</button>
+          <button class="btn btn-danger" onclick="excluirFuncionario('${func.id}')">Excluir</button>
+        </td>
+      </tr>
+    `;
+  });
+}
+
+
 
   /*dados.forEach(func => {
     tabela.innerHTML += `
