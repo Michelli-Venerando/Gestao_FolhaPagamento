@@ -206,3 +206,7 @@ function mostrarTela(tela) {
 
   document.getElementById("tela-" + tela).style.display = "block";
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  carregarFuncionariosSelect();
+});
