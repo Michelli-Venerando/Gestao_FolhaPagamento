@@ -119,7 +119,7 @@ async function salvarFuncionario() {
 }
 
 /* ============================
-   LIMPAR FORMULARIO
+   LIMPAR FORMULARIO - FUNCIONÁRIOS
 ============================ */
 function limparFormulario() {
   document.getElementById("idFuncionario").value = "";
@@ -142,12 +142,40 @@ async function salvarLancamento() {
   const tipo = document.getElementById("tipoLancamento").value;
   const valor = document.getElementById("valorLancamento").value;
 
-/*  if (tipo === "desconto") {
-  valorInput.style.display = "block";
-} else {
-  valorInput.style.display = "none";
-}*/
+  // ============================
+  // VALIDAÇÃO BÁSICA
+  // ============================
 
+  if (!funcionario_id || !data || !tipo) {
+    alert("Preencha todos os campos obrigatórios!");
+    return;
+  }
+
+    // ============================
+  // VALIDAÇÃO PARA DESCONTO
+  // ============================
+
+  if (tipo === "desconto") {
+
+    if (!valor) {
+      alert("Informe o valor do desconto!");
+      return;
+    }
+
+    if (!subtipo) {
+      alert("Selecione o tipo do desconto!");
+      return;
+    }
+
+    if (subtipo === "Outros" && !outro) {
+      alert("Descreva o desconto!");
+      return;
+    }
+  }
+
+   // ============================
+  // SALVAR FALTA / ATRASO
+  // ============================
   if (tipo === "falta" || tipo === "atraso") {
     await fetch("/faltas", {
       method: "POST",
@@ -161,6 +189,10 @@ async function salvarLancamento() {
       })
     });
   }
+
+  // ============================
+  // SALVAR DESCONTO
+  // ============================
 
 if (tipo === "desconto") {
   const data = document.getElementById("dataLancamento").value;
@@ -192,6 +224,8 @@ if (tipo === "desconto") {
 }
 
   alert("Lançamento salvo!");
+
+  limparLancamento(); // 👈 CHAMA LIMPEZA
 }
 
 /* ============================
@@ -253,3 +287,21 @@ function toggleOutroCampo() {
 document.addEventListener("DOMContentLoaded", () => {
   carregarFuncionarios();
 });
+
+/* ============================
+   LIMPAR FORMULARIO - LANÇAMNTOS
+============================ */
+function limparLancamento() {
+  document.getElementById("funcionarioLancamento").value = "";
+  document.getElementById("dataLancamento").value = "";
+  document.getElementById("tipoLancamento").value = "falta";
+
+  document.getElementById("valorLancamento").value = "";
+  document.getElementById("subtipoDesconto").value = "";
+  document.getElementById("obsOutro").value = "";
+
+  // Esconde campos novamente
+  document.getElementById("valorLancamento").style.display = "none";
+  document.getElementById("subtipoDesconto").style.display = "none";
+  document.getElementById("obsOutro").style.display = "none";
+}
