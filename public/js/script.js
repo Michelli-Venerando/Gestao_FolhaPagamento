@@ -74,7 +74,7 @@ async function carregarFuncionarios() {
       </tr>
     `;
   });*/
-}
+
 /* ============================
    CADASTRAR FUNCIONÁRIOS
 ============================ */
