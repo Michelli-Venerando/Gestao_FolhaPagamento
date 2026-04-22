@@ -228,12 +228,15 @@ function mostrarTela(tela) {
 
 function toggleTipoLancamento() {
   const tipo = document.getElementById("tipoLancamento").value;
+  const valor = document.getElementById("valorLancamento");
   const subtipo = document.getElementById("subtipoDesconto");
   const outro = document.getElementById("obsOutro");
 
   if (tipo === "desconto") {
+    valor.style.display = "block";
     subtipo.style.display = "block";
   } else {
+    valor.style.display = "none";
     subtipo.style.display = "none";
     outro.style.display = "none";
   }
