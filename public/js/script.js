@@ -142,6 +142,12 @@ async function salvarLancamento() {
   const tipo = document.getElementById("tipoLancamento").value;
   const valor = document.getElementById("valorLancamento").value;
 
+  if (tipo === "desconto") {
+  valorInput.style.display = "block";
+} else {
+  valorInput.style.display = "none";
+}
+
   if (tipo === "falta" || tipo === "atraso") {
     await fetch("/faltas", {
       method: "POST",
@@ -156,14 +162,18 @@ async function salvarLancamento() {
     });
   }
 
- if (tipo === "desconto") {
+if (tipo === "desconto") {
   const data = document.getElementById("dataLancamento").value;
-  //const descricao = document.getElementById("obsLancamento").value;
-  let descricao = document.getElementById("obsLancamento").value;
+  const subtipo = document.getElementById("subtipoDesconto").value;
+  const outro = document.getElementById("obsOutro").value;
 
-if (descricao === "Outros") {
-  descricao = document.getElementById("obsOutro").value;
-}
+  let descricao = subtipo;
+
+  if (subtipo === "Outros") {
+    descricao = outro;
+  }
+
+  descricao = `Desconto - ${descricao}`;
 
   await fetch("/descontos", {
     method: "POST",
@@ -213,11 +223,26 @@ function mostrarTela(tela) {
     carregarFuncionarios(); // 🔥 GARANTE que carrega
   }
 
-  function toggleOutroCampo() {
-  const tipo = document.getElementById("obsLancamento").value;
+
+
+function toggleTipoLancamento() {
+  const tipo = document.getElementById("tipoLancamento").value;
+  const subtipo = document.getElementById("subtipoDesconto");
+  const outro = document.getElementById("obsOutro");
+
+  if (tipo === "desconto") {
+    subtipo.style.display = "block";
+  } else {
+    subtipo.style.display = "none";
+    outro.style.display = "none";
+  }
+}
+
+function toggleOutroCampo() {
+  const subtipo = document.getElementById("subtipoDesconto").value;
   const campo = document.getElementById("obsOutro");
 
-  campo.style.display = tipo === "Outros" ? "block" : "none";
+  campo.style.display = subtipo === "Outros" ? "block" : "none";
 }
 }
 
