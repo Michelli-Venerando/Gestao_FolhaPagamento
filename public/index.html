@@ -84,7 +84,15 @@
   </select>
 
   <input type="number" id="valorLancamento" placeholder="Valor (para desconto)">
-  <input type="text" id="obsLancamento" placeholder="Observação">
+  
+  <select id="obsLancamento" onchange="toggleOutroCampo()">
+  <option value="">Selecione</option>
+  <option value="Almoço">Almoço</option>
+  <option value="Vale">Vale</option>
+  <option value="Adiantamento">Adiantamento</option>
+  <option value="Outros">Outros</option>
+</select>
+<input type="text" id="obsOutro" placeholder="Descreva..." style="display:none;">
 
   <button onclick="salvarLancamento()">Salvar</button>
 

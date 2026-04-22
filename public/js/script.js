@@ -134,7 +134,7 @@ function limparFormulario() {
 
 
 /* ============================
-   SALVAR FUNCIOÁRIOS
+   SALVAR LANÇAMENTOS
 ============================ */
 async function salvarLancamento() {
   const funcionario_id = document.getElementById("funcionarioLancamento").value;
@@ -156,21 +156,14 @@ async function salvarLancamento() {
     });
   }
 
-  /*if (tipo === "desconto") {
-    await fetch("/descontos", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        funcionario_id,
-        valor
-      })
-    });
-  }*/
  if (tipo === "desconto") {
   const data = document.getElementById("dataLancamento").value;
-  const descricao = document.getElementById("obsLancamento").value;
+  //const descricao = document.getElementById("obsLancamento").value;
+  let descricao = document.getElementById("obsLancamento").value;
+
+if (descricao === "Outros") {
+  descricao = document.getElementById("obsOutro").value;
+}
 
   await fetch("/descontos", {
     method: "POST",
@@ -219,6 +212,13 @@ function mostrarTela(tela) {
     if (tela === "lancamentos") {
     carregarFuncionarios(); // 🔥 GARANTE que carrega
   }
+
+  function toggleOutroCampo() {
+  const tipo = document.getElementById("obsLancamento").value;
+  const campo = document.getElementById("obsOutro");
+
+  campo.style.display = tipo === "Outros" ? "block" : "none";
+}
 }
 
 document.addEventListener("DOMContentLoaded", () => {
