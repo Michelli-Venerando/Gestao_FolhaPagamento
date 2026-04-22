@@ -86,14 +86,35 @@ app.put("/funcionarios/:id", async (req, res) => {
 ============================ */
 
 app.post('/descontos', async (req, res) => {
+  console.log("BODY DESCONTO:", req.body); // 👈 ADICIONE ISSO
+
+    const {
+    funcionario_id,
+    valor,
+    data_desconto,
+    descricao,
+    data_aplicacao
+  } = req.body;
+
   const { data, error } = await supabase
     .from('descontos')
-    .insert([req.body])
+    .insert([
+      {
+        funcionario_id,
+        valor,
+        data_desconto,
+        descricao,
+        data_aplicacao
+      }
+    ]);
 
-  if (error) return res.status(400).json(error)
+  if (error) {
+    console.log("ERRO DESCONTO:", error); // 👈 E ISSO
+    return res.status(400).json(error)
+  }
 
   res.json(data)
-})
+});
 
 /* ============================
    FALTAS

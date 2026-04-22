@@ -30,51 +30,6 @@ async function carregarFuncionarios() {
   });
 }
 
-/*async function carregarFuncionarios() {
-  const res = await fetch("/funcionarios");
-  const funcionarios = await res.json();
-  //const dados = await res.json();
-  //  const funcionarios = await res.json();
-
-   const select = document.getElementById("funcionarioLancamento");
-  select.innerHTML = "";
-
-  funcionarios.forEach(f => {
-    select.innerHTML += `<option value="${f.id}">${f.nome}</option>`;
-  });
-
-  const tabela = document.getElementById("listaFuncionarios");
-  tabela.innerHTML = "";
-
-  funcionarios.forEach(func => {
-    tabela.innerHTML += `
-      <tr>
-        <td>${func.nome}</td>
-        <td>R$ ${func.salario}</td>
-        <td>
-          <button class="btn btn-primary" onclick='editarFuncionario(${JSON.stringify(func)})'>Editar</button>
-          <button class="btn btn-danger" onclick="excluirFuncionario('${func.id}')">Excluir</button>
-        </td>
-      </tr>
-    `;
-  });
-}
-*/
-
-
-  /*dados.forEach(func => {
-    tabela.innerHTML += `
-      <tr>
-        <td>${func.nome}</td>
-        <td>R$ ${func.salario}</td>
-        <td>
-          <button class="btn btn-primary" onclick='editarFuncionario(${JSON.stringify(func)})'>Editar</button>
-          <button class="btn btn-danger" onclick="excluirFuncionario('${func.id}')">Excluir</button>
-        </td>
-      </tr>
-    `;
-  });*/
-
 /* ============================
    CADASTRAR FUNCIONÁRIOS
 ============================ */
@@ -103,17 +58,6 @@ async function cadastrarFuncionario() {
 
   carregarFuncionarios();
 }
-
- /* dados.forEach(func => {
-  tabela.innerHTML += `
-    <li>
-      ${func.nome} - R$ ${func.salario}
-      <button onclick="editarFuncionario('${func.id}', '${func.nome}', '${func.salario}')">Editar</button>
-      <button onclick="excluirFuncionario('${func.id}')">Excluir</button>
-    </li>
-  `;
-});*/
-
 
 /* ============================
    EXCLUIR
@@ -212,7 +156,7 @@ async function salvarLancamento() {
     });
   }
 
-  if (tipo === "desconto") {
+  /*if (tipo === "desconto") {
     await fetch("/descontos", {
       method: "POST",
       headers: {
@@ -223,7 +167,25 @@ async function salvarLancamento() {
         valor
       })
     });
-  }
+  }*/
+ if (tipo === "desconto") {
+  const data = document.getElementById("dataLancamento").value;
+  const descricao = document.getElementById("obsLancamento").value;
+
+  await fetch("/descontos", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      funcionario_id,
+      valor,
+      data_desconto: data,
+      descricao,
+      data_aplicacao: data
+    })
+  });
+}
 
   alert("Lançamento salvo!");
 }
