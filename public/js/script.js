@@ -4,7 +4,36 @@
 
 async function carregarFuncionarios() {
   const res = await fetch("/funcionarios");
-  const dados = await res.json();
+  const funcionarios = await res.json();
+
+  const select = document.getElementById("funcionarioLancamento");
+  select.innerHTML = "";
+
+  funcionarios.forEach(f => {
+    select.innerHTML += `<option value="${f.id}">${f.nome}</option>`;
+  });
+
+  const tabela = document.getElementById("listaFuncionarios");
+  tabela.innerHTML = "";
+
+  funcionarios.forEach(func => {
+    tabela.innerHTML += `
+      <tr>
+        <td>${func.nome}</td>
+        <td>R$ ${func.salario}</td>
+        <td>
+          <button class="btn btn-primary" onclick='editarFuncionario(${JSON.stringify(func)})'>Editar</button>
+          <button class="btn btn-danger" onclick="excluirFuncionario('${func.id}')">Excluir</button>
+        </td>
+      </tr>
+    `;
+  });
+}
+
+/*async function carregarFuncionarios() {
+  const res = await fetch("/funcionarios");
+  const funcionarios = await res.json();
+  //const dados = await res.json();
   //  const funcionarios = await res.json();
 
    const select = document.getElementById("funcionarioLancamento");
@@ -30,7 +59,7 @@ async function carregarFuncionarios() {
     `;
   });
 }
-
+*/
 
 
   /*dados.forEach(func => {
@@ -215,12 +244,19 @@ function gerarPDF() {
   window.open("/gerar-pdf", "_blank");
 }
 
+/* ============================
+   MOSTRAR TELA
+============================ */
 function mostrarTela(tela) {
   document.getElementById("tela-funcionarios").style.display = "none";
   document.getElementById("tela-lancamentos").style.display = "none";
   document.getElementById("tela-folha").style.display = "none";
 
   document.getElementById("tela-" + tela).style.display = "block";
+
+    if (tela === "lancamentos") {
+    carregarFuncionarios(); // 🔥 GARANTE que carrega
+  }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
