@@ -83,9 +83,9 @@
     <option value="desconto">Desconto</option>
   </select>
 
-  <input type="number" id="valorLancamento" placeholder="Valor (para desconto)">
+  <input type="number" id="valorLancamento" placeholder="Valor (para desconto)" style="display:none;">
   
-  <select id="obsLancamento" onchange="toggleOutroCampo()">
+ <select id="subtipoDesconto" onchange="toggleOutroCampo()" style="display:none;">
   <option value="">Selecione</option>
   <option value="Almoço">Almoço</option>
   <option value="Vale">Vale</option>

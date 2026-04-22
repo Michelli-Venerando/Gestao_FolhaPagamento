@@ -142,11 +142,11 @@ async function salvarLancamento() {
   const tipo = document.getElementById("tipoLancamento").value;
   const valor = document.getElementById("valorLancamento").value;
 
-  if (tipo === "desconto") {
+/*  if (tipo === "desconto") {
   valorInput.style.display = "block";
 } else {
   valorInput.style.display = "none";
-}
+}*/
 
   if (tipo === "falta" || tipo === "atraso") {
     await fetch("/faltas", {
@@ -166,6 +166,7 @@ if (tipo === "desconto") {
   const data = document.getElementById("dataLancamento").value;
   const subtipo = document.getElementById("subtipoDesconto").value;
   const outro = document.getElementById("obsOutro").value;
+  const valor = document.getElementById("valorLancamento").value;
 
   let descricao = subtipo;
 
@@ -222,7 +223,7 @@ function mostrarTela(tela) {
     if (tela === "lancamentos") {
     carregarFuncionarios(); // 🔥 GARANTE que carrega
   }
-
+}
 
 
 function toggleTipoLancamento() {
@@ -244,7 +245,7 @@ function toggleOutroCampo() {
 
   campo.style.display = subtipo === "Outros" ? "block" : "none";
 }
-}
+
 
 document.addEventListener("DOMContentLoaded", () => {
   carregarFuncionarios();
